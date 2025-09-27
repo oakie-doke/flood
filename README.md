@@ -1,22 +1,22 @@
 # Flood Risk Assessment & Evacuation Planner
 
-A comprehensive web application that identifies high-risk flood areas in the United States and provides optimal evacuation routes using real-time data from USGS, NOAA, and traffic APIs.
+A comprehensive web application that identifies high-risk flood areas in the United States and provides optimal evacuation routes using real-time data from the National Oceanic and Atmospheric Administration, United States Geological Survey Map Viewer, and Nominatim.
 
 ## Features
 
-### 🌊 Flood Risk Assessment
-- **Elevation Data Integration**: Uses USGS National Map Viewer API for accurate elevation data
-- **Rainfall Analysis**: Integrates NOAA precipitation data for real-time rainfall monitoring
-- **Risk Calculation**: Advanced algorithm combining elevation and rainfall data to assess flood risk
-- **Interactive Risk Visualization**: Color-coded map showing risk levels across the United States
+###  Flood Risk Assessment
+- **Elevation Data Integration**: Uses USGS National Map Viewer API for accurate elevation data at every named location in the United States.
+- **Rainfall Analysis**: Integrates NOAA precipitation forecast data for real-time rainfall monitoring.
+- **Risk Calculation**: Contains an algorithm to calculate the risk based on elevation, rainfall, and proximity to water.
+- **Interactive Risk Visualization**: Color-coded map showing risk levels at different inputted locations across the United States.
 
-### 🚗 Evacuation Planning
-- **Safe Area Identification**: Automatically identifies high-elevation, low-risk areas
-- **Route Optimization**: Uses real-time traffic data to find the fastest evacuation routes
-- **Multiple Route Options**: Provides alternative routes based on current traffic conditions
-- **Real-time Updates**: Continuously updates routes based on changing conditions
+###  Evacuation Planning
+- **Safe Area Identification**: Automatically low-risk areas after inputting a city in eminent danger of flooding.
+- **Route Optimization**: Uses real-time traffic data to find the fastest evacuation routes through Google Maps.
+- **Multiple Route Options**: Provides alternative routes based on current traffic conditions.
+- **Real-time Updates**: Continuously updates routes based on changing conditions.
 
-### 🎨 User Interface
+###  User Interface
 - **Bright & Professional Design**: Modern, intuitive interface with excellent UX
 - **Responsive Layout**: Works seamlessly on desktop, tablet, and mobile devices
 - **Interactive Map**: Full-featured map with multiple layer options
@@ -27,17 +27,12 @@ A comprehensive web application that identifies high-risk flood areas in the Uni
 ### USGS National Map Viewer
 - **Elevation Data**: Detailed topographic information for flood risk assessment
 - **API Endpoint**: `https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer`
-- **Coverage**: Complete United States with high-resolution elevation data
+- **Coverage**: Complete United States (including territories) with high-resolution elevation data
 
 ### NOAA Weather Data
-- **Precipitation Data**: Real-time and historical rainfall information
+- **Precipitation Data**: Real-time and forecasted and historical rainfall information
 - **API Endpoint**: `https://api.water.noaa.gov/`
 - **Update Frequency**: Hourly updates for current conditions
-
-### Traffic Data
-- **Real-time Traffic**: Current traffic conditions and congestion data
-- **Route Planning**: Optimized routing considering traffic patterns
-- **Multiple Providers**: Integration with Google Maps, HERE Maps, and OpenStreetMap
 
 ## Technical Implementation
 
@@ -50,27 +45,8 @@ A comprehensive web application that identifies high-risk flood areas in the Uni
 ### APIs and Services
 - **Geocoding**: OpenStreetMap Nominatim for address lookup
 - **Mapping**: OpenStreetMap tiles with satellite imagery options
-- **Routing**: Multiple routing services for evacuation planning
+- **Elevation**: USGS National Map Viewer API for determining elevation
 - **Weather**: NOAA weather data integration
-
-### Risk Assessment Algorithm
-```javascript
-function calculateFloodRisk(elevation, rainfall) {
-    let riskScore = 0;
-    
-    // Elevation factor (lower elevation = higher risk)
-    if (elevation < 50) riskScore += 3;
-    else if (elevation < 100) riskScore += 2;
-    else if (elevation < 200) riskScore += 1;
-    
-    // Rainfall factor
-    if (rainfall > 40) riskScore += 3;
-    else if (rainfall > 25) riskScore += 2;
-    else if (rainfall > 10) riskScore += 1;
-    
-    return riskScore >= 5 ? 'high' : riskScore >= 3 ? 'medium' : 'low';
-}
-```
 
 ## Installation & Setup
 
@@ -78,6 +54,7 @@ function calculateFloodRisk(elevation, rainfall) {
 - Modern web browser with JavaScript enabled
 - Internet connection for API access
 - No server setup required (client-side application)
+- Redirecting between pages must be enabled to use the automatic connection to Google Maps
 
 ### Quick Start
 1. Clone or download the project files
@@ -101,63 +78,16 @@ npx serve .
 3. **Search**: Press Enter or click the search button
 
 ### Assessing Flood Risk
-1. **Enable Data Layers**: Toggle elevation, rainfall, and flood risk data
-2. **View Risk Level**: Check the risk indicator in the control panel
-3. **Interactive Map**: Click on markers to see detailed information
+1. **Automatic Risk Evaluation**: View the Risk Level indicator to determine danger
+2. **Interactive Map**: Add additional markers to determine conditions in locations across the United States
 
 ### Planning Evacuation
-1. **Find Safe Areas**: Click "Find Safe Areas" to identify safe locations
-2. **Plan Route**: Click "Plan Evacuation Route" for optimized routing
-3. **View Route Details**: Click on route lines for distance and time estimates
-
-## API Integration Details
-
-### USGS Elevation Data
-```javascript
-async function getElevationData(lat, lng) {
-    const response = await fetch(
-        `https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/identify?f=json&geometry=${lng},${lat}&geometryType=esriGeometryPoint&returnGeometry=false&imageDisplay=500,500,96&sr=4326`
-    );
-    const data = await response.json();
-    return data.results[0].attributes.VALUE;
-}
-```
-
-### NOAA Rainfall Data
-```javascript
-async function getRainfallData(lat, lng) {
-    const response = await fetch(
-        `https://api.water.noaa.gov/precipitation/v1/current?lat=${lat}&lng=${lng}`
-    );
-    const data = await response.json();
-    return data.precipitation;
-}
-```
-
-### Traffic Data Integration
-```javascript
-async function getTrafficData(route) {
-    // Integration with multiple traffic APIs
-    const trafficData = await Promise.all([
-        getGoogleTrafficData(route),
-        getHEREtrafficData(route),
-        getOpenStreetMapTrafficData(route)
-    ]);
-    return optimizeRoute(trafficData);
-}
-```
-
-## Safety Features
-
-### Emergency Protocols
-- **High Risk Alerts**: Immediate notifications for high-risk areas
-- **Evacuation Recommendations**: Clear guidance on when to evacuate
-- **Route Validation**: Continuous validation of evacuation routes
-- **Backup Routes**: Alternative routes in case of road closures
+1. **Find Safe Areas**: Safe areas are automatically determined when risk is High or Very High
+2. **Plan Route**: Click "Get Directions" for optimized routing to a nearby safe area
+3. **Connectivity**: Open directions in Google Maps to alter routes at your discretion
 
 ### Data Accuracy
 - **Real-time Updates**: Continuous data refresh for accuracy
-- **Multiple Sources**: Cross-validation using multiple data sources
 - **Quality Control**: Data validation and error handling
 - **Fallback Options**: Graceful degradation when APIs are unavailable
 
@@ -175,15 +105,6 @@ async function getTrafficData(route) {
 - **ES6 Modules**: For modern JavaScript features
 - **CSS Grid/Flexbox**: For responsive layout
 
-## Contributing
-
-### Development Setup
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ### Code Standards
 - **ESLint**: JavaScript linting
 - **Prettier**: Code formatting
@@ -200,4 +121,5 @@ For questions, issues, or contributions, please contact the development team or 
 
 ---
 
-**⚠️ Important Disclaimer**: This application is for informational purposes only. Always follow official emergency guidance and evacuation orders from local authorities.
+**Important Disclaimer**: This application is for informational purposes only. Always follow official emergency guidance and evacuation orders from local authorities even when contradicted by the model.
+
