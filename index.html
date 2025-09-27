@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Risk Assessment & Evacuation Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🌊 FloodSafe</h1>
+                <p class="tagline">Real-time flood risk assessment and evacuation planning</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h3>📍 Location</h3>
+                    <div class="location-input">
+                        <input type="text" id="locationInput" placeholder="Enter your address or city" />
+                        <button id="searchLocationBtn" class="btn btn-secondary">Search Location</button>
+                        <button id="getLocationBtn" class="btn btn-primary">Use Current Location</button>
+                    </div>
+                </div>
+
+
+                <div class="panel-section">
+                    <h3>⚠️ Flood Risk Assessment</h3>
+                    <div class="risk-display">
+                        <div class="risk-score-display">
+                            <div class="risk-score-label">Risk Score:</div>
+                            <div class="risk-score-value" id="riskScoreValue">--</div>
+                        </div>
+                        <div class="risk-level-display">
+                            <div class="risk-level-text" id="riskLevelText">No Assessment</div>
+                            <div class="risk-level-description" id="riskLevelDescription">Enter a location to assess flood risk</div>
+                        </div>
+                        <div class="safer-city-display" id="saferCityDisplay" style="display: none;">
+                            <div class="safer-city-label">📍 Safer Alternative:</div>
+                            <div class="safer-city-name" id="saferCityName">--</div>
+                            <div class="safer-city-distance" id="saferCityDistance">--</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay">
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading data...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Elevation:</span>
+                <span id="elevationValue">--</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Rainfall (24h):</span>
+                <span id="rainfallValue">--</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
