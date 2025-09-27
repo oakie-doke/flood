@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Risk Assessment & Evacuation Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🌊 FloodSafe</h1>
+                <p class="tagline">Real-time flood risk assessment and evacuation planning</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h3>📍 Location</h3>
+                    <div class="location-input">
+                        <input type="text" id="locationInput" placeholder="Enter your address or city" />
+                        <button id="getLocationBtn" class="btn btn-primary">Use Current Location</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>⚙️ Risk Assessment</h3>
+                    <div class="risk-controls">
+                        <label>
+                            <input type="checkbox" id="showElevation" checked />
+                            Show Elevation Data
+                        </label>
+                        <label>
+                            <input type="checkbox" id="showRainfall" checked />
+                            Show Rainfall Data
+                        </label>
+                        <label>
+                            <input type="checkbox" id="showFloodRisk" checked />
+                            Show Flood Risk Areas
+                        </label>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🚗 Evacuation Planning</h3>
+                    <div class="evacuation-controls">
+                        <button id="findSafeAreasBtn" class="btn btn-secondary">Find Safe Areas</button>
+                        <button id="planEvacuationBtn" class="btn btn-accent">Plan Evacuation Route</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📊 Risk Level</h3>
+                    <div class="risk-indicator">
+                        <div class="risk-level" id="riskLevel">Low</div>
+                        <div class="risk-description" id="riskDescription">No immediate threat detected</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay">
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading data...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Elevation:</span>
+                <span id="elevationValue">--</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Rainfall (24h):</span>
+                <span id="rainfallValue">--</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Data Source:</span>
+                <span id="dataSourceValue">--</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Traffic:</span>
+                <span id="trafficValue">--</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
