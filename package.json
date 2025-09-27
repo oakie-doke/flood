@@ -1,0 +1,41 @@
+{
+  "name": "flood-risk-assessment-evacuation-planner",
+  "version": "1.0.0",
+  "description": "A comprehensive web application for flood risk assessment and evacuation planning using USGS, NOAA, and traffic data",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "dev": "npx live-server --port=8000 --open=/index.html"
+  },
+  "keywords": [
+    "flood-risk",
+    "evacuation-planning",
+    "usgs",
+    "noaa",
+    "traffic-data",
+    "emergency-planning",
+    "gis",
+    "mapping"
+  ],
+  "author": "FloodSafe Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/flood-risk-assessment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/flood-risk-assessment/issues"
+  },
+  "homepage": "https://github.com/your-username/flood-risk-assessment#readme"
+}
