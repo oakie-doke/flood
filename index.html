@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Risk Assessment & Evacuation Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="floodsafe.svg" alt="FloodSafe" class="logo-svg">
+                </div>
+                <p class="tagline">Real-time flood risk assessment and evacuation planning</p>
+            </div>
+            <button id="infoButton" class="info-button" title="How does this site work?">i</button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h3><span class="material-symbols-outlined">distance</span> Location</h3>
+                    <div class="location-input">
+                        <input type="text" id="locationInput" placeholder="Enter your address or city" />
+                        <button id="searchLocationBtn" class="btn btn-secondary">Search Location</button>
+                        <button id="getLocationBtn" class="btn btn-primary">Use Current Location</button>
+                    </div>
+                </div>
+
+
+                <div class="panel-section">
+                    <h3><span class="material-symbols-outlined">flood</span> Flood Risk Assessment</h3>
+                    <div class="risk-display">
+                        <div class="risk-score-display">
+                            <div class="risk-score-label">Risk Score:</div>
+                            <div class="risk-score-value" id="riskScoreValue">--</div>
+                        </div>
+                        <div class="risk-level-display">
+                            <div class="risk-level-text" id="riskLevelText">No Assessment</div>
+                            <div class="risk-level-description" id="riskLevelDescription">Enter a location to assess flood risk</div>
+                        </div>
+                <div class="safer-city-display" id="saferCityDisplay" style="display: none;">
+                    <div class="safer-city-label"><span class="material-symbols-outlined">distance</span> Safer Alternative:</div>
+                    <div class="safer-city-name" id="saferCityName">--</div>
+                    <div class="safer-city-distance" id="saferCityDistance">--</div>
+                    <button class="btn btn-accent" id="getDirectionsBtn">Get Directions</button>
+                </div>
+                <div class="safer-search-loading" id="saferSearchLoading" style="display: none;">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Searching for safer alternatives...</p>
+                    </div>
+                </div>
+                <div class="no-safe-alternatives" id="noSafeAlternatives" style="display: none;">
+                    <div class="no-safe-alternatives-content">
+                        <span class="material-symbols-outlined">warning</span>
+                        <div class="no-safe-alternatives-text">
+                            <strong>Stay Safe</strong>
+                            <p>No safer locations found within a reasonable distance. Please follow local emergency guidelines and evacuate to the nearest designated shelter.</p>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay">
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading data...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Elevation:</span>
+                <span id="elevationValue">--</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Rainfall (24h):</span>
+                <span id="rainfallValue">--</span>
+            </div>
+        </div>
+    </div>
+
+<!-- Information Modal -->
+<div id="infoModal" class="info-modal" style="display: none;">
+    <div class="info-modal-content">
+        <div class="info-modal-header">
+            <h1>Information</h1>
+            <button id="closeInfoModal" class="close-button">&times;</button>
+        </div>
+        <div class="info-modal-body">
+            <div class="info-section">
+                <h2>How to Use FloodSafe</h2>
+            </div>
+            <div class="info-section">
+                <p>
+                1. Enter your city, zip code, address or press "Use Current Location."<br>
+                2. FloodSafe will use rainfall, elevation, and geographical data to calculate a Risk Score between 1 and 100.<br>
+                3. If the area is deemed high risk for flooding, FloodSafe will find the closest nearby safe city.<br>
+                4. Click "Get Directions" to be redirected to Google Maps and find your route to safety.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>How It Works</h2>
+            </div>
+            <div class="info-section">
+                <h3>Location Assessment</h3>
+                <p>Enter your address or use your current location to get started. FloodSafe fetches real-time elevation and weather data for your location from US Geological Survey, Open Elevation API, and National Weather Service.</p>
+            </div>
+            <div class="info-section">
+                <h3>Risk Calculation</h3>
+                <p>Our algorithm considers multiple factors including elevation, recent rainfall, and proximity to water bodies to calculate your current flood risk level (Low, Medium, High, or Very High).</p>
+            </div>
+            <div class="info-section">
+                <h3>Emergency Planning</h3>
+                <p>If your area is at risk, FloodSafe will find the closest safe city and redirect you to Google Maps.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
