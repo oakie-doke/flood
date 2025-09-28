@@ -1,0 +1,839 @@
+/* =============================================================================
+   FLOOD RISK ASSESSMENT & EVACUATION PLANNER - STYLES
+   =============================================================================
+   
+   This stylesheet provides comprehensive styling for the Flood Risk Assessment
+   and Evacuation Planner web application. It includes responsive design,
+   modern UI components, and accessibility features.
+   
+   Key Design Principles:
+   - Mobile-first responsive design
+   - Clean, modern interface with glassmorphism effects
+   - Accessible color contrast and typography
+   - Consistent spacing and visual hierarchy
+   - Smooth animations and transitions
+   
+   @author FloodSafe Development Team
+   @version 1.0.0
+   ============================================================================= */
+
+/* =============================================================================
+   RESET AND BASE STYLES
+   =============================================================================
+   Establishes consistent baseline styles across all browsers and elements
+   ============================================================================= */
+
+/* Universal reset to ensure consistent styling across browsers */
+* {
+    margin: 0;           /* Remove default margins */
+    padding: 0;          /* Remove default padding */
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+}
+
+/* Base body styling with modern typography and background */
+body {
+    font-family: "Lexend", sans-serif;  /* Modern, readable font stack */
+    background: linear-gradient(135deg, #686f88 0%, #434e99 100%); /* Gradient background */
+    min-height: 100vh;   /* Ensure full viewport height */
+    color: #333;         /* Dark gray text for good readability */
+}
+
+/* =============================================================================
+   LAYOUT CONTAINERS
+   =============================================================================
+   Main structural elements for the application layout
+   ============================================================================= */
+
+/* Main application container using flexbox for full-height layout */
+.app-container {
+    display: flex;           /* Enable flexbox layout */
+    flex-direction: column;  /* Stack elements vertically */
+    height: 100vh;          /* Full viewport height */
+    max-width: 1200px;     /* Match header and main content width */
+    margin: 0 auto;        /* Center the entire app container */
+}
+
+/* =============================================================================
+   HEADER STYLES
+   =============================================================================
+   Top navigation and branding area with glassmorphism effect
+   ============================================================================= */
+
+/* Header with glassmorphism effect and backdrop blur */
+.header {
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+    backdrop-filter: blur(10px);           /* Blur effect for glassmorphism */
+    padding: 1rem 2rem;                    /* Comfortable padding */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 1000;                         /* Ensure header stays on top */
+    position: relative;                    /* Enable relative positioning for children */
+    display: flex;                         /* Enable flexbox layout */
+    justify-content: space-between;        /* Space between content and info button */
+    align-items: center;                   /* Center items vertically */
+    width: 100vw;                         /* Full viewport width */
+    margin-left: calc(-50vw + 50%);       /* Extend beyond container to full width */
+}
+
+/* Header content aligned to left */
+.header-content {
+    margin: 0;          /* Remove auto centering */
+}
+
+/* Main logo styling with brand colors */
+.logo {
+    margin-bottom: 0.25rem; /* Small spacing below logo */
+}
+
+/* SVG logo styling */
+.logo-svg {
+    height: 60px;           /* Appropriate height for header */
+    width: auto;            /* Maintain aspect ratio */
+    max-width: 100%;        /* Responsive sizing */
+}
+
+/* Subtitle/tagline styling */
+.tagline {
+    color: #64748b;         /* Muted gray color */
+    font-size: 0.9rem;      /* Smaller than logo */
+    font-weight: 400;       /* Normal weight */
+}
+
+
+/* =============================================================================
+   MAIN CONTENT AREA
+   =============================================================================
+   Central content area containing control panel and map
+   ============================================================================= */
+
+/* Main content area using flexbox for side-by-side layout */
+.main-content {
+    display: flex;          /* Enable flexbox layout */
+    flex: 1;               /* Take up remaining space */
+    margin: 0;             /* Align to left to match header */
+    width: 100%;           /* Full width */
+    gap: 1rem;             /* Space between control panel and map */
+    padding: 1rem;         /* Padding around the content */
+}
+
+/* =============================================================================
+   CONTROL PANEL STYLES
+   =============================================================================
+   Left sidebar containing user controls and information
+   ============================================================================= */
+
+/* Control panel with glassmorphism effect and scrollable content */
+.control-panel {
+    width: 300px;                              /* Fixed width for consistency */
+    background: rgba(255, 255, 255, 0.95);    /* Semi-transparent white background */
+    backdrop-filter: blur(10px);               /* Blur effect for glassmorphism */
+    border-radius: 12px;                       /* Rounded corners for modern look */
+    padding: 1.5rem;                           /* Comfortable internal padding */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    height: fit-content;                       /* Height based on content */
+    max-height: calc(100vh - 200px);          /* Prevent overflow on small screens */
+    overflow-y: auto;                          /* Enable vertical scrolling if needed */
+}
+
+/* Individual sections within the control panel */
+.panel-section {
+    margin-bottom: 1.5rem;                     /* Space between sections */
+    padding-bottom: 1.5rem;                    /* Internal padding at bottom */
+    border-bottom: 1px solid #e2e8f0;         /* Subtle separator line */
+}
+
+/* Remove border and margin from last section */
+.panel-section:last-child {
+    border-bottom: none;   /* No border on last section */
+    margin-bottom: 0;      /* No margin on last section */
+}
+
+/* Section headings styling */
+.panel-section h3 {
+    font-size: 1rem;       /* Readable heading size */
+    font-weight: 600;      /* Semi-bold weight */
+    color: #1e293b;        /* Dark gray for good contrast */
+    margin-bottom: 0.75rem; /* Space below heading */
+}
+
+/* =============================================================================
+   LOCATION INPUT STYLES
+   =============================================================================
+   Styling for location search and input controls
+   ============================================================================= */
+
+/* Location input container with vertical layout */
+.location-input {
+    display: flex;          /* Enable flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    gap: 0.5rem;           /* Space between input and button */
+}
+
+/* Location input field styling */
+#locationInput {
+    padding: 0.75rem;       /* Comfortable padding inside input */
+    border: 2px solid #e2e8f0; /* Light gray border */
+    border-radius: 8px;     /* Rounded corners */
+    font-size: 0.9rem;      /* Readable font size */
+    transition: border-color 0.2s; /* Smooth transition for focus state */
+}
+
+/* Focus state for location input */
+#locationInput:focus {
+    outline: none;          /* Remove default browser outline */
+    border-color: #3b82f6;  /* Blue border on focus */
+}
+
+/* =============================================================================
+   BUTTON STYLES
+   =============================================================================
+   Reusable button components with different variants
+   ============================================================================= */
+
+/* Base button styling with common properties */
+.btn {
+    padding: 0.75rem 1rem;  /* Comfortable padding */
+    border: none;           /* Remove default border */
+    border-radius: 8px;     /* Rounded corners */
+    font-family: "Lexend", sans-serif; /* Lexend font family */
+    font-size: 0.9rem;      /* Readable font size */
+    font-weight: 500;       /* Medium weight */
+    cursor: pointer;        /* Pointer cursor on hover */
+    transition: all 0.2s;   /* Smooth transitions for all properties */
+    text-align: center;     /* Center text within button */
+}
+
+/* Primary button variant (main actions) */
+.btn-primary {
+    background: #434e99;    /* Right side of gradient color */
+    color: white;           /* White text */
+}
+
+/* Primary button hover state */
+.btn-primary:hover {
+    background: #3a4380;    /* Darker shade of right gradient color */
+    transform: translateY(-1px); /* Slight upward movement for feedback */
+}
+
+/* Secondary button variant (secondary actions) */
+.btn-secondary {
+    background: #686f88;    /* Left side of gradient color */
+    color: white;           /* White text */
+}
+
+/* Secondary button hover state */
+.btn-secondary:hover {
+    background: #5a6274;    /* Darker shade of left gradient color */
+    transform: translateY(-1px); /* Slight upward movement for feedback */
+}
+
+/* Accent button variant (success/positive actions) */
+.btn-accent {
+    background: #10b981;    /* Green background */
+    color: white;           /* White text */
+}
+
+/* Accent button hover state */
+.btn-accent:hover {
+    background: #059669;    /* Darker green on hover */
+    transform: translateY(-1px); /* Slight upward movement for feedback */
+}
+
+/* =============================================================================
+   RISK CONTROLS STYLES
+   =============================================================================
+   Styling for risk assessment toggle controls
+   ============================================================================= */
+
+/* Site explanation container with vertical layout */
+.site-explanation {
+    display: flex;          /* Enable flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: 0.75rem;           /* Space between explanation items */
+}
+
+/* Site explanation paragraphs */
+.site-explanation p {
+    margin: 0;              /* Remove default margins */
+    font-size: 0.9rem;      /* Readable font size */
+    color: #4b5563;         /* Muted text color */
+    line-height: 1.4;       /* Good line spacing */
+}
+
+/* Site explanation strong text */
+.site-explanation strong {
+    color: #1f2937;         /* Darker text color for emphasis */
+    font-weight: 600;       /* Semi-bold weight */
+}
+
+/* =============================================================================
+   RISK DISPLAY STYLES
+   =============================================================================
+   Styling for flood risk assessment display
+   ============================================================================= */
+
+/* Risk display container */
+.risk-display {
+    display: flex;          /* Enable flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    gap: 1rem;             /* Space between score and level */
+}
+
+/* Risk score display */
+.risk-score-display {
+    display: flex;          /* Enable flexbox layout */
+    justify-content: space-between; /* Space between label and value */
+    align-items: center;    /* Center vertically */
+    padding: 0.75rem;       /* Internal padding */
+    background: #f8fafc;    /* Light background */
+    border-radius: 8px;     /* Rounded corners */
+    border: 1px solid #e2e8f0; /* Light border */
+}
+
+.risk-score-label {
+    font-weight: 600;       /* Semi-bold weight */
+    color: #475569;         /* Dark gray color */
+}
+
+.risk-score-value {
+    font-size: 1.25rem;     /* Larger text */
+    font-weight: 700;       /* Bold weight */
+    color: #1e293b;         /* Dark color */
+}
+
+/* Risk level display */
+.risk-level-display {
+    text-align: center;     /* Center all content */
+}
+
+.risk-level-text {
+    font-size: 1.5rem;      /* Large, prominent text */
+    font-weight: 700;       /* Bold weight for emphasis */
+    margin-bottom: 0.25rem; /* Small space below level text */
+}
+
+/* Risk level color classes */
+.risk-level-text.low {
+    color: #10b981;         /* Green color for low risk */
+}
+
+.risk-level-text.medium {
+    color: #f59e0b;         /* Yellow/orange color for medium risk */
+}
+
+.risk-level-text.high {
+    color: #f97316;         /* Orange color for high risk */
+}
+
+.risk-level-text.very-high {
+    color: #ef4444;         /* Red color for very high risk */
+}
+
+.risk-level-text.no-assessment {
+    color: #64748b;         /* Gray color for no assessment */
+}
+
+.risk-level-description {
+    font-size: 0.8rem;      /* Smaller text for description */
+    color: #64748b;         /* Muted gray color */
+}
+
+/* Safer city display */
+.safer-city-display {
+    margin-top: 1rem;       /* Space above the safer city info */
+    padding: 0.75rem;       /* Internal padding */
+    background: #f0f9ff;    /* Light blue background */
+    border-radius: 8px;     /* Rounded corners */
+    border: 1px solid #bae6fd; /* Light blue border */
+    text-align: center;     /* Center all content */
+}
+
+.safer-city-label {
+    font-size: 0.8rem;      /* Smaller text for label */
+    font-weight: 600;       /* Semi-bold weight */
+    color: #0369a1;         /* Blue color */
+    margin-bottom: 0.25rem; /* Small space below label */
+}
+
+.safer-city-name {
+    font-size: 1.1rem;      /* Larger text for city name */
+    font-weight: 700;       /* Bold weight */
+    color: #0c4a6e;         /* Dark blue color */
+    margin-bottom: 0.25rem; /* Small space below name */
+}
+
+.safer-city-distance {
+    font-size: 0.75rem;     /* Smaller text for distance */
+    color: #64748b;         /* Muted gray color */
+    margin-bottom: 0.75rem; /* Space above the button */
+}
+
+.safer-city-display .btn {
+    width: 100%;            /* Full width button */
+    margin-top: 0.5rem;     /* Space above button */
+}
+
+/* Safer search loading spinner */
+.safer-search-loading {
+    margin-top: 1rem;       /* Space above the loading spinner */
+    padding: 1rem;          /* Internal padding */
+    background: #f8fafc;    /* Light background */
+    border-radius: 8px;     /* Rounded corners */
+    border: 1px solid #e2e8f0; /* Light border */
+    text-align: center;     /* Center all content */
+}
+
+.safer-search-loading .loading-spinner {
+    display: flex;          /* Enable flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;    /* Center horizontally */
+    gap: 0.75rem;          /* Space between spinner and text */
+}
+
+.safer-search-loading .spinner {
+    width: 24px;            /* Smaller spinner size */
+    height: 24px;           /* Smaller spinner size */
+    border: 3px solid #e2e8f0; /* Light gray border */
+    border-top: 3px solid #3b82f6; /* Blue top border for animation */
+    border-radius: 50%;     /* Circular shape */
+    animation: spin 1s linear infinite; /* Continuous rotation animation */
+}
+
+.safer-search-loading p {
+    margin: 0;              /* Remove default margins */
+    font-size: 0.85rem;     /* Smaller text */
+    color: #64748b;         /* Muted gray color */
+    font-weight: 500;       /* Medium weight */
+}
+
+/* No safe alternatives message */
+.no-safe-alternatives {
+    margin-top: 1rem;       /* Space above the message */
+    padding: 1rem;          /* Internal padding */
+    background: #fef2f2;    /* Light red background */
+    border-radius: 8px;     /* Rounded corners */
+    border: 1px solid #fecaca; /* Light red border */
+    text-align: left;       /* Left align content */
+}
+
+.no-safe-alternatives-content {
+    display: flex;          /* Enable flexbox layout */
+    align-items: flex-start; /* Align items to top */
+    gap: 0.75rem;          /* Space between icon and text */
+}
+
+.no-safe-alternatives-content .material-symbols-outlined {
+    font-size: 24px;        /* Icon size */
+    color: #ef4444;         /* Red color for warning */
+    margin: 0;              /* Remove default margin */
+    flex-shrink: 0;         /* Prevent icon from shrinking */
+}
+
+.no-safe-alternatives-text {
+    flex: 1;               /* Take up remaining space */
+}
+
+.no-safe-alternatives-text strong {
+    display: block;         /* Make strong text a block element */
+    font-size: 0.9rem;      /* Readable font size */
+    font-weight: 600;       /* Semi-bold weight */
+    color: #dc2626;         /* Dark red color */
+    margin-bottom: 0.5rem; /* Space below strong text */
+}
+
+.no-safe-alternatives-text p {
+    margin: 0;              /* Remove default margins */
+    font-size: 0.8rem;      /* Smaller text */
+    color: #7f1d1d;         /* Darker red color */
+    line-height: 1.4;       /* Good line spacing */
+}
+
+
+
+/* =============================================================================
+   MAP CONTAINER STYLES
+   =============================================================================
+   Styling for the interactive map area
+   ============================================================================= */
+
+/* Map container with flexible sizing and rounded corners */
+.map-container {
+    flex: 1;                /* Take up remaining space */
+    position: relative;     /* Enable absolute positioning for overlays */
+    border-radius: 12px;    /* Rounded corners for modern look */
+    overflow: hidden;       /* Hide content that overflows rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Map element styling */
+#map {
+    width: 100%;            /* Full width of container */
+    height: 100%;           /* Full height of container */
+    min-height: 500px;      /* Minimum height for usability */
+}
+
+/* Map overlay for loading states and other overlays */
+.map-overlay {
+    position: absolute;     /* Position over the map */
+    top: 0;                 /* Cover entire map area */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;          /* Enable flexbox for centering */
+    align-items: center;    /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    z-index: 1000;          /* Ensure overlay appears above map */
+}
+
+/* Loading spinner container */
+.loading-spinner {
+    text-align: center;     /* Center the spinner */
+}
+
+/* Animated loading spinner */
+.spinner {
+    width: 40px;            /* Spinner size */
+    height: 40px;           /* Spinner size */
+    border: 4px solid #e2e8f0; /* Light gray border */
+    border-top: 4px solid #3b82f6; /* Blue top border for animation */
+    border-radius: 50%;     /* Circular shape */
+    animation: spin 1s linear infinite; /* Continuous rotation animation */
+    margin: 0 auto 1rem;    /* Center horizontally with bottom margin */
+}
+
+/* Spinner rotation animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }   /* Start at 0 degrees */
+    100% { transform: rotate(360deg); } /* End at 360 degrees (full rotation) */
+}
+
+/* =============================================================================
+   STATUS BAR STYLES
+   =============================================================================
+   Bottom status bar showing current data and information
+   ============================================================================= */
+
+/* Status bar with glassmorphism effect */
+.status-bar {
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+    backdrop-filter: blur(10px);           /* Blur effect for glassmorphism */
+    padding: 0.75rem 2rem;                 /* Comfortable padding */
+    display: flex;                          /* Enable flexbox layout */
+    gap: 2rem;                             /* Space between status items */
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1); /* Shadow above the bar */
+    width: 100vw;                         /* Full viewport width */
+    margin-left: calc(-50vw + 50%);       /* Extend beyond container to full width */
+}
+
+/* Individual status item styling */
+.status-item {
+    display: flex;          /* Enable flexbox layout */
+    gap: 0.5rem;           /* Space between label and value */
+    font-size: 0.9rem;     /* Readable font size */
+}
+
+/* Status label styling */
+.status-label {
+    color: #64748b;         /* Muted gray color */
+    font-weight: 500;       /* Medium weight */
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   =============================================================================
+   Mobile-first responsive breakpoints and adjustments
+   ============================================================================= */
+
+/* Mobile and tablet styles (768px and below) */
+@media (max-width: 768px) {
+    /* Stack main content vertically on mobile */
+    .main-content {
+        flex-direction: column; /* Stack control panel above map */
+        padding: 0.5rem;        /* Reduce padding on mobile */
+    }
+    
+    /* Make control panel full width on mobile */
+    .control-panel {
+        width: 100%;            /* Full width on mobile */
+        max-height: none;       /* Remove height constraint */
+    }
+    
+    /* Reduce header padding on mobile */
+    .header {
+        padding: 1rem;          /* Reduce padding on mobile */
+    }
+    
+    /* Reduce logo size on mobile */
+    .logo {
+        font-size: 1.5rem;      /* Smaller logo on mobile */
+    }
+    
+    /* Stack status bar items vertically on mobile */
+    .status-bar {
+        flex-direction: column; /* Stack items vertically */
+        gap: 0.5rem;           /* Reduce gap between items */
+        padding: 1rem;         /* Increase padding for touch targets */
+    }
+}
+
+/* =============================================================================
+   MAP CUSTOMIZATION STYLES
+   =============================================================================
+   Custom styling for Leaflet map components
+   ============================================================================= */
+
+/* =============================================================================
+   CUSTOM MAP MARKERS
+   =============================================================================
+   Styling for different types of map markers
+   ============================================================================= */
+
+/* Flood risk marker styling (red) */
+.flood-marker {
+    background: #ef4444;    /* Red background for flood risk */
+    border: 2px solid white; /* White border for contrast */
+    border-radius: 50%;     /* Circular shape */
+    width: 20px;            /* Marker size */
+    height: 20px;           /* Marker size */
+}
+
+/* Safe area marker styling (green) */
+.safe-marker {
+    background: #10b981;    /* Green background for safe areas */
+    border: 2px solid white; /* White border for contrast */
+    border-radius: 50%;     /* Circular shape */
+    width: 20px;            /* Marker size */
+    height: 20px;           /* Marker size */
+}
+
+/* Evacuation route marker styling (blue) */
+.evacuation-marker {
+    background: #3b82f6;    /* Blue background for evacuation routes */
+    border: 2px solid white; /* White border for contrast */
+    border-radius: 50%;     /* Circular shape */
+    width: 20px;            /* Marker size */
+    height: 20px;           /* Marker size */
+}
+
+/* =============================================================================
+   MATERIAL ICONS STYLES
+   =============================================================================
+   Styling for Google Material Icons
+   ============================================================================= */
+
+/* Material Icons base styling */
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    font-size: 30px;
+    vertical-align: middle;
+    margin-right: 8px;
+    color: #434e99;
+}
+
+/* Material Icons in headings */
+h3 .material-symbols-outlined {
+    font-size: 30px;
+    margin-right: 8px;
+    color: #434e99;
+}
+
+/* Material Icons in labels */
+.safer-city-label .material-symbols-outlined {
+    font-size: 30px;
+    margin-right: 8px;
+    color: #686f88;
+}
+
+/* =============================================================================
+   INFO BUTTON STYLES
+   =============================================================================
+   Circular information button in the top right corner
+   ============================================================================= */
+
+/* Circular info button */
+.info-button {
+    width: 40px;                    /* Fixed width for circular shape */
+    height: 40px;                   /* Fixed height for circular shape */
+    border-radius: 50%;             /* Perfect circle */
+    background: #434e99;            /* Match the right side of gradient */
+    color: white;                   /* White text */
+    border: none;                   /* Remove default border */
+    font-family: "Lexend", sans-serif; /* Consistent font */
+    font-size: 1.2rem;             /* Readable size for the 'i' */
+    font-weight: 600;              /* Semi-bold for better visibility */
+    cursor: pointer;               /* Pointer cursor on hover */
+    display: flex;                 /* Enable flexbox for centering */
+    align-items: center;           /* Center vertically */
+    justify-content: center;       /* Center horizontally */
+    transition: all 0.2s;          /* Smooth transitions */
+    box-shadow: 0 2px 8px rgba(67, 78, 153, 0.3); /* Subtle shadow */
+    z-index: 1001;                 /* Ensure button is above other elements */
+}
+
+/* Info button hover state */
+.info-button:hover {
+    background: #3a4380;           /* Slightly darker on hover */
+    transform: translateY(-1px);   /* Slight upward movement for feedback */
+    box-shadow: 0 4px 12px rgba(67, 78, 153, 0.4); /* Enhanced shadow */
+}
+
+/* Info button active state */
+.info-button:active {
+    transform: translateY(0);      /* Reset transform when clicked */
+    box-shadow: 0 2px 8px rgba(67, 78, 153, 0.3); /* Reset shadow */
+}
+
+/* =============================================================================
+   INFO MODAL STYLES
+   =============================================================================
+   Modal overlay and content for site information
+   ============================================================================= */
+
+/* Modal overlay */
+.info-modal {
+    position: fixed;               /* Fixed positioning to cover entire viewport */
+    top: 0;                        /* Cover from top */
+    left: 0;                       /* Cover from left */
+    right: 0;                      /* Cover from right */
+    bottom: 0;                     /* Cover from bottom */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 2000;                 /* High z-index to appear above everything */
+    display: flex;                 /* Enable flexbox for centering */
+    align-items: center;           /* Center vertically */
+    justify-content: center;       /* Center horizontally */
+    padding: 1rem;                 /* Padding around modal */
+    backdrop-filter: blur(4px);    /* Blur background */
+}
+
+/* Modal content container */
+.info-modal-content {
+    background: white;             /* White background */
+    border-radius: 12px;           /* Rounded corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Strong shadow for depth */
+    max-width: 600px;              /* Maximum width */
+    width: 100%;                   /* Full width within max constraint */
+    max-height: 80vh;              /* Maximum height */
+    overflow-y: auto;              /* Enable scrolling if needed */
+    animation: modalSlideIn 0.3s ease-out; /* Slide-in animation */
+}
+
+/* Modal header */
+.info-modal-header {
+    display: flex;                 /* Enable flexbox layout */
+    justify-content: space-between; /* Space between title and close button */
+    align-items: center;           /* Center vertically */
+    padding: 1.5rem 2rem 1rem;    /* Comfortable padding */
+    border-bottom: 1px solid #e2e8f0; /* Subtle border */
+}
+
+/* Modal title */
+.info-modal-header h2 {
+    margin: 0;                     /* Remove default margins */
+    font-size: 1.5rem;            /* Large title */
+    font-weight: 700;             /* Bold weight */
+    color: #1e293b;               /* Dark color */
+    font-family: "Lexend", sans-serif; /* Consistent font */
+}
+
+/* Close button */
+.close-button {
+    background: none;              /* No background */
+    border: none;                  /* No border */
+    font-size: 2rem;              /* Large close symbol */
+    color: #64748b;               /* Muted color */
+    cursor: pointer;               /* Pointer cursor */
+    padding: 0.25rem;             /* Small padding for touch target */
+    border-radius: 4px;           /* Rounded corners */
+    transition: color 0.2s;       /* Smooth color transition */
+    display: flex;                /* Enable flexbox for centering */
+    align-items: center;          /* Center vertically */
+    justify-content: center;      /* Center horizontally */
+    width: 32px;                  /* Fixed width */
+    height: 32px;                 /* Fixed height */
+}
+
+/* Close button hover state */
+.close-button:hover {
+    color: #ef4444;               /* Red color on hover */
+    background: #fef2f2;          /* Light red background */
+}
+
+/* Modal body */
+.info-modal-body {
+    padding: 1.5rem 2rem 2rem;    /* Comfortable padding */
+}
+
+/* Individual info sections */
+.info-section {
+    margin-bottom: 1.5rem;        /* Space between sections */
+}
+
+.info-section:last-child {
+    margin-bottom: 0;             /* No margin on last section */
+}
+
+/* Info section headings */
+.info-section h3 {
+    margin: 0 0 0.75rem 0;        /* Space below heading */
+    font-size: 1.1rem;            /* Readable size */
+    font-weight: 600;             /* Semi-bold weight */
+    color: #1e293b;               /* Dark color */
+    font-family: "Lexend", sans-serif; /* Consistent font */
+}
+
+/* Info section paragraphs */
+.info-section p {
+    margin: 0;                    /* Remove default margins */
+    font-size: 0.95rem;           /* Readable size */
+    color: #4b5563;               /* Muted text color */
+    line-height: 1.6;             /* Good line spacing */
+    font-family: "Lexend", sans-serif; /* Consistent font */
+}
+
+/* Modal slide-in animation */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;               /* Start transparent */
+        transform: translateY(-20px) scale(0.95); /* Start slightly above and smaller */
+    }
+    to {
+        opacity: 1;               /* End opaque */
+        transform: translateY(0) scale(1); /* End in normal position and size */
+    }
+}
+
+/* Mobile responsive adjustments for info button and modal */
+@media (max-width: 768px) {
+    /* Adjust info button size on mobile */
+    .info-button {
+        width: 36px;              /* Slightly smaller on mobile */
+        height: 36px;             /* Slightly smaller on mobile */
+        font-size: 1.1rem;        /* Slightly smaller font */
+    }
+    
+    /* Adjust modal content on mobile */
+    .info-modal-content {
+        margin: 1rem;             /* Add margin on mobile */
+        max-height: 85vh;         /* Adjust max height */
+    }
+    
+    /* Adjust modal header on mobile */
+    .info-modal-header {
+        padding: 1rem 1.5rem 0.75rem; /* Reduce padding on mobile */
+    }
+    
+    /* Adjust modal body on mobile */
+    .info-modal-body {
+        padding: 1rem 1.5rem 1.5rem; /* Reduce padding on mobile */
+    }
+    
+    /* Adjust modal title on mobile */
+    .info-modal-header h2 {
+        font-size: 1.25rem;       /* Smaller title on mobile */
+    }
+}
+
